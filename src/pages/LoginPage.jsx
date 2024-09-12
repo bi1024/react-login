@@ -8,22 +8,26 @@ const LoginPage = () => {
     const [account, setAccount] = useState(null);
     const [password, setPassword] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    async function  handleLogin() {
+    async function  handleLogin(event) {
+        event.preventDefault();
+        console.log('utte');
         const response = await fetch('http://localhost:3001/user');
         const data = await response.json();
-        data.map(item=>{if(account===item.account && password===item.password){ 
+         data.map(item=>{if(account===item.account && password===item.password){ 
             if(item.role==='admin'){
                 navigate('/admin');
+                return;
             }
-            else navigate('/home');
+            else {navigate('/home');
+                return;
+            }
         }else{setErrorMsg('Account Not Found')}});
-        console.log(data);
-        // navigate('/home');
+        
     }
 
     return (<div className=" d-flex justify-content-center vh-100">
         <Row className="align-items-center">
-            <Form>
+            <Form onSubmit={handleLogin}>
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src="logo512.png" />
                     <Card.Body>
@@ -42,7 +46,7 @@ const LoginPage = () => {
                                 className="mb-3"
                             >
 
-                                <Form.Control name="account" onChange={(event) => { setAccount(event.target.value); console.log(account) }} type="email" placeholder="Enter account" />
+                                <Form.Control name="account" onChange={(event) => { setAccount(event.target.value); console.log(account) }} placeholder="Enter account" />
                             </FloatingLabel>
                         </Form.Group>
                         <Form.Group>
@@ -58,7 +62,7 @@ const LoginPage = () => {
                         </Form.Group>
                         <div className="d-grid block">
 
-                            <Button onClick={handleLogin} className="" variant="primary">Login</Button>
+                            <Button type="submit"  className="" variant="primary">Login</Button>
                         </div>
                         <Container className="d-flex justify-content-between">
                             <Link to="/signup">Sign Up</Link>
