@@ -5,26 +5,38 @@ import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
     let navigate = useNavigate();
+    const [name, setName] = useState(null);
     const [account, setAccount] = useState(null);
     const [password, setPassword] = useState(null);
     const [confPassword, setConfPassword] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    // async function  handleLogin() {
-    //     const response = await fetch('http://localhost:3001/user');
-    //     const data = await response.json();
-    //     data.map(item=>{if(account===item.account && password===item.password){ 
-    //         if(item.role==='admin'){
-    //             navigate('/admin');
-    //         }
-    //         else navigate('/home');
-    //     }else{setErrorMsg('Account Not Found')}});
-    //     console.log(data);
-   
-    // }
+    async function handleRegister(event) {
+        event.preventDefault();
+        if (password !== confPassword) {
+            setErrorMsg('Passwords do not match');
+            return;
+        }
+        fetch("http://localhost:3001/user", {
+            method: "POST",
+            body: JSON.stringify({
+                "name": name,
+                "account": account,
+                "password": password,
+                "role": "user"
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then((response) => response.json())
+            .then(() => navigate('/'));
+
+
+    }
 
     return (<div className=" d-flex justify-content-center vh-100">
         <Row className="align-items-center">
-            <Form>
+            <Form onSubmit={handleRegister}>
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src="logo512.png" />
                     <Card.Body>
@@ -33,7 +45,18 @@ const SignUpPage = () => {
                                 {errorMsg}
                             </Alert>
                         )}
+                        <Form.Group>
+                            <FloatingLabel
 
+                                controlId="name"
+
+                                label="Name"
+                                className="mb-3"
+                            >
+
+                                <Form.Control required name="name" onChange={(event) => { setName(event.target.value); console.log(name) }} placeholder="Enter name" />
+                            </FloatingLabel>
+                        </Form.Group>
                         <Form.Group>
                             <FloatingLabel
 
@@ -43,7 +66,7 @@ const SignUpPage = () => {
                                 className="mb-3"
                             >
 
-                                <Form.Control name="account" onChange={(event) => { setAccount(event.target.value); console.log(account) }} type="email" placeholder="Enter account" />
+                                <Form.Control required name="account" onChange={(event) => { setAccount(event.target.value); console.log(account) }} placeholder="Enter account" />
                             </FloatingLabel>
                         </Form.Group>
                         <Form.Group>
@@ -54,7 +77,7 @@ const SignUpPage = () => {
                                 className="mb-3"
                             >
 
-                                <Form.Control name="password" onChange={(event) => { setPassword(event.target.value); console.log(password) }} type="password" placeholder="Enter account" />
+                                <Form.Control required name="password" onChange={(event) => { setPassword(event.target.value); console.log(password) }} type="password" placeholder="Enter account" />
                             </FloatingLabel>
                         </Form.Group>
                         <Form.Group>
@@ -65,15 +88,16 @@ const SignUpPage = () => {
                                 className="mb-3"
                             >
 
-                                <Form.Control name="password" onChange={(event) => { setConfPassword(event.target.value); console.log(confPassword) }} type="password" placeholder="Enter account" />
+                                <Form.Control required name="password" onChange={(event) => { setConfPassword(event.target.value); console.log(confPassword) }} type="password" placeholder="Enter account" />
                             </FloatingLabel>
                         </Form.Group>
                         <div className="d-grid block">
+                            <Button type="submit" className="" variant="primary">Sign Up</Button>
 
-                            {/* <Button onClick={handleLogin} className="" variant="primary">Sign up</Button> */}
                         </div>
+                        <br></br>
                         <Container className="d-flex justify-content-between">
-                            <Link to="/signup">Sign Up</Link>
+                            <Link to="/">Login</Link>
                             <Link to="/forgot">Forgot Password</Link>
                         </Container>
 

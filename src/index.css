@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.card {
+  border-radius: 1em;
+}
+
+.form-control{
+  border-radius: 1em;
+}
+
+.btn{
+  border-radius: 1.5em;
+}
+
+form .card{
+  background-color: #F1F7FE;
+}
+
+a{
+  text-decoration: none;
+}
+
+.svg{
+  position: absolute;
+}
