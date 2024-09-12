@@ -38,7 +38,7 @@ const SignUpPage = () => {
         <Row className="align-items-center">
             <Form onSubmit={handleRegister}>
                 <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="logo512.png" />
+                    <Card.Img  className="px-5" variant="top" src="logo512.png" />
                     <Card.Body>
                         {errorMsg && (
                             <Alert variant='danger'>

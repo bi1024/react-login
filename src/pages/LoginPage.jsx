@@ -29,8 +29,8 @@ const LoginPage = () => {
     return (<div className=" d-flex justify-content-center vh-100">
         <Row className="align-items-center">
             <Form onSubmit={handleLogin}>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="logo512.png" />
+                <Card  style={{ width: '18rem' }}>
+                    <Card.Img className="px-5" variant="top" src="logo512.png" />
                     <Card.Body>
                         {/* <FontAwesomeIcon icon="fa-regular fa-user" /> */}
                         {errorMsg && (
