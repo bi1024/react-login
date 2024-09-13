@@ -6,13 +6,15 @@ import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import AdminPage from './pages/AdminPage';
+import router from './routes';
+import { RouterProvider } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App ">
-
-      <BrowserRouter>
-        {/* <Appheader></Appheader> */}
+   <RouterProvider router={router} />
+      {/* <BrowserRouter>
+      
         <Routes>
           <Route path="/" element={
             <>
@@ -25,7 +27,7 @@ function App() {
           <Route path="/admin" element={<AdminPage />}></Route>
 
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </div>
   );
 }
