@@ -1,13 +1,10 @@
 //Splitting router into separate file
-
-
-import {
-    createBrowserRouter,
-    RouterProvider,
-    useNavigate,
-} from "react-router-dom";
+import React from "react";
+import { createBrowserRouter } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
+import HomePage from './pages/HomePage';
+import AdminPage from './pages/AdminPage';
 
 
 
@@ -19,6 +16,14 @@ const router = createBrowserRouter([
     {
         path: "/signup",
         element: <SignUpPage></SignUpPage>,
+    },
+    {
+        path: "/home",
+        element: <HomePage></HomePage>,
+    },
+    {
+        path: "/admin",
+        element: <AdminPage></AdminPage>,
     },
 ]);
 export default router;
